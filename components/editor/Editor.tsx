@@ -11,16 +11,23 @@ import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import React from 'react';
 
+import { FloatingComposer, FloatingThreads, liveblocksConfig, LiveblocksPlugin, useEditorStatus } from '@liveblocks/react-lexical'
+
+import { useThreads } from '@liveblocks/react/suspense';
+
 // Catch any errors that occur during Lexical updates and log them
 // or throw them as needed. If you don't throw them, Lexical will
 // try to recover gracefully without losing user data.
 
 function Placeholder() {
-  return <div className="editor-placeholder">Digite algo...</div>;
+  return <div className="editor-placeholder">Digite Algo...</div>;
 }
 
-export function Editor() {
-  const initialConfig = {
+export function Editor({ roomId, currentUserType }: { roomId: string, currentUserType: UserType }) {
+  const status = useEditorStatus();
+  const { threads } = useThreads();
+
+  const initialConfig = liveblocksConfig({
     namespace: 'Editor',
     nodes: [HeadingNode],
     onError: (error: Error) => {
@@ -28,23 +35,36 @@ export function Editor() {
       throw error;
     },
     theme: Theme,
-  };
+    editable: currentUserType === 'editor',
+  });
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <div className="editor-container size-full">
-        <ToolbarPlugin />
+        <div className="toolbar-wrapper flex min-w-full justify-between">
+          <ToolbarPlugin />
+          
+        </div>
 
-        <div className="editor-inner h-[1100px]">
-          <RichTextPlugin
-            contentEditable={
-              <ContentEditable className="editor-input h-full" />
-            }
-            placeholder={<Placeholder />}
-            ErrorBoundary={LexicalErrorBoundary}
-          />
-          <HistoryPlugin />
-          <AutoFocusPlugin />
+        <div className="editor-wrapper flex flex-col items-center justify-start">
+          {status === 'not-loaded' || status === 'loading' ? <span>Loading...</span> : (
+            <div className="editor-inner min-h-[1100px] relative mb-5 h-fit w-full max-w-[800px] shadow-md lg:mb-10">
+              <RichTextPlugin
+                contentEditable={
+                  <ContentEditable className="editor-input h-full" />
+                }
+                placeholder={<Placeholder />}
+                ErrorBoundary={LexicalErrorBoundary}
+              />
+              <HistoryPlugin />
+              <AutoFocusPlugin />
+            </div>
+          )}
+
+          <LiveblocksPlugin>
+            <FloatingComposer className="w-[350px]" />
+            <FloatingThreads threads={threads} />
+          </LiveblocksPlugin>
         </div>
       </div>
     </LexicalComposer>
