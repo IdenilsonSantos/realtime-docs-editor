@@ -17,6 +17,7 @@ import Loader from '../loader';
 import FloatingToolbarPlugin from './plugins/FloatingToobarPlugin'
 import { useThreads } from '@liveblocks/react/suspense';
 import { DeleteModal } from '../deleteModal';
+import Comments from '../comments';
 
 function Placeholder() {
   return <div className="editor-placeholder">Digite algo...</div>;
@@ -64,6 +65,7 @@ export function Editor({ roomId, currentUserType }: { roomId: string, currentUse
           <LiveblocksPlugin>
             <FloatingComposer className="w-[350px]" />
             <FloatingThreads threads={threads} />
+            <Comments />
           </LiveblocksPlugin>
         </div>
       </div>
