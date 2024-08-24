@@ -3,11 +3,13 @@
 import { ClientSideSuspense, RoomProvider } from '@liveblocks/react/suspense'
 import { Editor } from '@/components/editor/Editor'
 import Header from '@/components/header'
+import Loader from '@/components/loader';
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 import { useEffect, useRef, useState } from 'react';
-import { Input } from './ui/input';
+import { Input } from '../ui/input';
 import Image from 'next/image';
 import { updateDocument } from '@/lib/actions/room.actions';
+
 
 const CollaborativeRoom = ({ roomId, roomMetadata, users, currentUserType }: CollaborativeRoomProps) => {
   const [documentTitle, setDocumentTitle] = useState(roomMetadata.title);
@@ -61,7 +63,7 @@ const CollaborativeRoom = ({ roomId, roomMetadata, users, currentUserType }: Col
 
   return (
     <RoomProvider id={roomId}>
-      <ClientSideSuspense fallback={<span>Loading...</span>}>
+      <ClientSideSuspense fallback={<Loader/>}>
         <div className="collaborative-room">
           <Header>
             <div ref={containerRef} className="flex w-fit items-center justify-center gap-2">
