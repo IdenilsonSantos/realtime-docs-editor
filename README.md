@@ -13,7 +13,7 @@
 
 </div>
 
-## <a name="table">Glossário</a>
+## <a name="table">Conteúdo</a>
 
 1. [Sobre](#introduction)
 2. [Tecnologias](#tech-stack)
@@ -40,7 +40,7 @@ Aplicação realtime construída com Next.js, Liveblocks que possibilitam a inte
 
 👉 **Autenticação**: Autenticação através da ferramenta Clerk, que possibilita a integração da aplicação com o google ou outras ferramentas desejadas para iniciar ou encerrar uma sessão.
 
-👉 **Colaboração**: Os usuários cadasstrados podem editar o documento de forma simultanea.
+👉 **Colaboração**: Os usuários cadastrados podem editar o documento de forma simultanea.
 
 👉 **Manipulação dos Documentos**
    - **Criação**: Os usuários podem criar novos documentos, que são salvos e listados automaticamente.
@@ -48,7 +48,7 @@ Aplicação realtime construída com Next.js, Liveblocks que possibilitam a inte
    - **Compartilhar Documentos**: Os usuários podem compartilhar documentos com permissões de visualização ou edição.
    - **Listar documentos**: Exibe todos os documentos que pertencem ou são compartilhados com o usuário
 
-👉 **Commentários**: Usuários podem adicionar comentários que serão vistos por outros usuários em tempo rreal.
+👉 **Comentários**: Usuários podem adicionar comentários que serão vistos por outros usuários em tempo rreal.
 
 👉 **Usuários ativos**: Mostra os usuários ativos por meio de identificadores coloridos.
 
@@ -67,7 +67,7 @@ Você precisa ter o seguinte para rodar em sua máquina:
 **Clone este repositório**
 
 ```bash
-clone do git https://github.com/IdenilsonSantos/realtimedocseditor.git
+git clone https://github.com/IdenilsonSantos/realtimedocseditor.git
 cd realtimedocseditor
 ```
 
